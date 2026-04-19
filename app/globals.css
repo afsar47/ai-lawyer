@@ -1,0 +1,303 @@
+@import "tailwindcss";
+
+body {
+  background-color: #f9fafb; /* bg-gray-50 - direct value to avoid CSS variable issues */
+  color: #171717;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Improve input field visibility */
+input::placeholder,
+textarea::placeholder {
+  color: #6b7280 !important; /* text-gray-500 */
+  opacity: 1;
+}
+
+input:focus::placeholder,
+textarea:focus::placeholder {
+  color: #9ca3af !important; /* text-gray-400 */
+  opacity: 0.7;
+}
+
+/* Ensure better contrast for form elements */
+input, textarea, select {
+  color: #1f2937 !important; /* text-gray-800 */
+}
+
+/* Improve table header visibility */
+th {
+  color: #374151 !important; /* text-gray-700 */
+}
+
+/* Better secondary text visibility */
+.text-secondary {
+  color: #4b5563 !important; /* text-gray-600 */
+}
+
+/* Better muted text visibility */
+.text-muted {
+  color: #6b7280 !important; /* text-gray-500 */
+}
+
+/* Ensure all buttons and links have pointer cursor */
+button, [role="button"], input[type="button"], input[type="submit"] {
+  cursor: pointer !important;
+}
+
+a, [role="link"] {
+  cursor: pointer !important;
+}
+
+/* Ensure clickable elements in navigation and interactive components */
+.nav-link, .btn, .button, .link, .clickable {
+  cursor: pointer !important;
+}
+
+/* Fix for Chrome subpixel rendering issues */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Prevent unexpected focus outlines - only show on keyboard navigation */
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+
+*:focus-visible {
+  outline: 2px solid #3b82f6;
+  outline-offset: 2px;
+}
+
+/* Print Styles for Invoice and Lab Reports */
+@media print {
+  /* Hide navigation, sidebar, and action buttons */
+  .no-print,
+  nav,
+  aside,
+  footer,
+  button:not(.print-only),
+  [role="navigation"],
+  [role="complementary"] {
+    display: none !important;
+  }
+
+  /* Hide sidebar - more specific selectors */
+  .min-h-screen.bg-gray-50.flex > div:first-child:not(main),
+  [class*="sidebar"],
+  [class*="Sidebar"] {
+    display: none !important;
+  }
+
+  /* Remove background colors and shadows */
+  body {
+    background: white !important;
+    color: black !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* Make main content full width */
+  .min-h-screen {
+    display: block !important;
+  }
+
+  main {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Hide page headers in print but keep document headers */
+  header:not(.invoice-header):not(.lab-header) {
+    display: none !important;
+  }
+
+  /* Invoice and Lab Report document styling */
+  .invoice-document,
+  .lab-report-document {
+    display: block !important;
+    visibility: visible !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 20px 30px !important;
+    box-shadow: none !important;
+    border: none !important;
+    background: white !important;
+    position: relative !important;
+    z-index: 9999 !important;
+    font-family: 'Times New Roman', serif !important;
+    page-break-inside: auto !important;
+    page-break-after: auto !important;
+  }
+
+  /* Ensure proper page breaks - allow content to flow */
+  .invoice-document,
+  .lab-report-document {
+    page-break-inside: auto !important;
+  }
+
+  table {
+    page-break-inside: auto;
+    width: 100% !important;
+  }
+
+  tr {
+    page-break-inside: avoid;
+    page-break-after: auto;
+  }
+
+  thead {
+    display: table-header-group;
+  }
+
+  tfoot {
+    display: table-footer-group;
+  }
+
+  /* Remove all colors except black for text */
+  .invoice-document *,
+  .lab-report-document * {
+    color: #000 !important;
+    background: transparent !important;
+  }
+
+  /* Keep borders for tables */
+  table,
+  th,
+  td {
+    border: 1px solid #000 !important;
+    border-collapse: collapse !important;
+  }
+
+  /* Ensure text is readable */
+  h1, h2, h3, h4, h5, h6 {
+    color: #000 !important;
+    page-break-after: avoid;
+  }
+
+  /* Prevent page breaks inside important sections - but allow for tables */
+  .invoice-header,
+  .invoice-totals {
+    page-break-inside: avoid;
+  }
+
+  /* Allow lab results table to break across pages if needed */
+  .lab-results {
+    page-break-inside: auto;
+  }
+
+  /* Prevent breaking inside table rows */
+  .lab-results tr {
+    page-break-inside: avoid;
+  }
+
+  /* Set page margins */
+  @page {
+    size: A4;
+    margin: 1.5cm 2cm;
+  }
+
+  /* Remove link styling */
+  a {
+    text-decoration: none !important;
+    color: #000 !important;
+  }
+
+  /* Ensure proper spacing - reduce for print */
+  .invoice-document > *,
+  .lab-report-document > * {
+    margin-bottom: 1rem;
+  }
+
+  .lab-report-document > * {
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Force display for document content */
+  .lab-report-document div,
+  .lab-report-document table,
+  .lab-report-document p,
+  .lab-report-document span,
+  .lab-report-document h1,
+  .lab-report-document h2,
+  .lab-report-document h3 {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  .lab-report-document table {
+    display: table !important;
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .lab-report-document thead {
+    display: table-header-group !important;
+  }
+
+  .lab-report-document tbody {
+    display: table-row-group !important;
+  }
+
+  .lab-report-document tr {
+    display: table-row !important;
+  }
+
+  .lab-report-document th,
+  .lab-report-document td {
+    display: table-cell !important;
+    padding: 10px 12px !important;
+    text-align: left !important;
+    vertical-align: top !important;
+  }
+
+  /* Professional typography for lab reports */
+  .lab-report-document h1 {
+    font-size: 24pt !important;
+    font-weight: bold !important;
+    letter-spacing: 2px !important;
+  }
+
+  .lab-report-document h2 {
+    font-size: 14pt !important;
+    font-weight: bold !important;
+  }
+
+  .lab-report-document h3 {
+    font-size: 12pt !important;
+    font-weight: bold !important;
+  }
+
+  .lab-report-document p,
+  .lab-report-document span {
+    font-size: 10pt !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Hide rounded corners and colored badges in print */
+  .rounded-full {
+    border-radius: 0 !important;
+    border: 1px solid #000 !important;
+    padding: 2px 8px !important;
+  }
+
+  /* Professional grid layout in print */
+  .lab-report-document .grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 15px !important;
+  }
+
+  /* Ensure borders are visible */
+  .lab-report-document .border-gray-900 {
+    border-color: #000 !important;
+    border-width: 2px !important;
+  }
+
+  .lab-report-document .border-gray-700,
+  .lab-report-document .border-gray-300 {
+    border-color: #000 !important;
+    border-width: 1px !important;
+  }
+}

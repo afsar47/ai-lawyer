@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lawyer - User Documentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        html {
+            scroll-behavior: auto;
+        }
+        .section-anchor {
+            scroll-margin-top: 80px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Sidebar -->
+    <nav class="fixed left-0 top-0 h-full w-64 bg-blue-900 text-white overflow-y-auto z-40 hidden lg:block">
+        <div class="p-6">
+            <h1 class="text-2xl font-bold mb-8 flex items-center">
+                <i class="fas fa-balance-scale mr-3 text-blue-300"></i>
+                AI Lawyer
+            </h1>
+            <ul class="space-y-2">
+                <li><a href="#introduction" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-book-open mr-3 w-5"></i>Introduction</a></li>
+                <li><a href="#technology-stack" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-code mr-3 w-5"></i>Technology Stack</a></li>
+                <li><a href="#installation" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-download mr-3 w-5"></i>Installation</a></li>
+                <li><a href="#getting-started" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-rocket mr-3 w-5"></i>Getting Started</a></li>
+                <li><a href="#dashboard" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-tachometer-alt mr-3 w-5"></i>Dashboard</a></li>
+                <li><a href="#clients" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-users mr-3 w-5"></i>Client Management</a></li>
+                <li><a href="#cases" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-briefcase mr-3 w-5"></i>Cases</a></li>
+                <li><a href="#tasks-deadlines-hearings" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-tasks mr-3 w-5"></i>Tasks, Deadlines & Hearings</a></li>
+                <li><a href="#appointments" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-calendar-alt mr-3 w-5"></i>Calendar & Appointments</a></li>
+                <li><a href="#documents" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-file-alt mr-3 w-5"></i>Documents</a></li>
+                <li><a href="#lawyers-staff" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-user-tie mr-3 w-5"></i>Lawyers & Staff</a></li>
+                <li><a href="#billing" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-file-invoice-dollar mr-3 w-5"></i>Billing</a></li>
+                <li><a href="#analytical-reports" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-chart-line mr-3 w-5"></i>Analytical Reports</a></li>
+                <li><a href="#internationalization" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-language mr-3 w-5"></i>Language (i18n)</a></li>
+                <li><a href="#ai-features" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-brain mr-3 w-5"></i>AI Features</a></li>
+                <li><a href="#ai-assistant" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-robot mr-3 w-4"></i>AI Assistant</a></li>
+                <li><a href="#ai-drafting" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-file-alt mr-3 w-4"></i>AI Drafting</a></li>
+                <li><a href="#ai-matter-intake" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-clipboard-check mr-3 w-4"></i>AI Matter Intake</a></li>
+                <li><a href="#ai-timeline" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-chart-line mr-3 w-4"></i>AI Timeline</a></li>
+                <li><a href="#ai-contract-review" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-shield-alt mr-3 w-4"></i>AI Contract Review</a></li>
+                <li><a href="#ai-motion-draft" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-gavel mr-3 w-4"></i>AI Motion Draft</a></li>
+                <li><a href="#ai-letter-pack" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-envelope-open-text mr-3 w-4"></i>AI Letter Pack</a></li>
+                <li><a href="#ai-knowledge-search" class="block px-4 py-2 ml-4 text-sm rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-search mr-3 w-4"></i>AI Knowledge Search</a></li>
+                <li><a href="#settings" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-cog mr-3 w-5"></i>Settings & Profile</a></li>
+                <li><a href="#tips" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-lightbulb mr-3 w-5"></i>Tips & Best Practices</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="lg:ml-64">
+        <!-- Header -->
+        <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-8 shadow-lg">
+            <div class="max-w-4xl mx-auto">
+                <h1 class="text-4xl font-bold mb-4 flex items-center">
+                    <i class="fas fa-balance-scale mr-4 text-blue-200"></i>
+                    AI Lawyer
+                </h1>
+                <p class="text-xl text-blue-100">AI Lawyer - AI-Powered Legal Practice Management System</p>
+                <p class="mt-4 text-blue-200">Comprehensive User Documentation</p>
+                <p class="mt-2 text-blue-200 text-sm">Last updated: Feb 2026</p>
+            </div>
+        </header>
+
+        <!-- Content Container -->
+        <div class="max-w-4xl mx-auto p-8 space-y-12">
+            
+            <!-- Introduction -->
+            <section id="introduction" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-book-open text-blue-600 mr-3"></i>
+                    Introduction
+                </h2>
+                <div class="prose max-w-none">
+                    <p class="text-gray-700 leading-relaxed mb-4">
+                        Welcome to <strong>AI Lawyer</strong>, an AI-powered legal practice management system designed to streamline daily operations for law firms and legal professionals. The platform combines core practice management (clients, cases, tasks, deadlines, hearings, documents, billing) with AI-assisted tools for drafting, contract review, matter intake, and legal research.
+                    </p>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-6">
+                        <p class="text-blue-800"><strong>Key Benefits:</strong></p>
+                        <ul class="list-disc list-inside text-blue-700 mt-2 space-y-1">
+                            <li>Streamlined client and case management</li>
+                            <li>Calendar, appointments, and hearing scheduling</li>
+                            <li>AI-powered legal drafting, contract review, and knowledge search</li>
+                            <li>Document management with templates and uploads</li>
+                            <li>Secure data management with role-based access and hashed passwords</li>
+                        </ul>
+                    </div>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-6">
+                        <p class="text-amber-900 font-semibold mb-2">Important Disclaimer – OpenAI API Required for AI Features</p>
+                        <ul class="list-disc list-inside text-amber-800 text-sm space-y-1">
+                            <li><strong>External API key required:</strong> An OpenAI API key is required for the AI features to function.</li>
+                            <li><strong>Buyer responsibility for costs:</strong> Any costs associated with the use of the OpenAI API are the sole responsibility of the buyer.</li>
+                            <li><strong>No pre-paid subscription included:</strong> This item does NOT include a pre-paid OpenAI API subscription. You must purchase API credits directly from OpenAI.</li>
+                        </ul>
+                        <p class="text-amber-700 text-sm mt-2">Core features (case management, billing, documents, etc.) work without an AI API key.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Technology Stack & Dependencies -->
+            <section id="technology-stack" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-code text-indigo-600 mr-3"></i>
+                    Technology Stack & Dependencies
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        This application is built with modern, secure, and up-to-date technologies. All dependencies have been updated to meet the latest security requirements and best practices.
+                    </p>
+                    
+                    <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-lg mb-6">
+                        <h3 class="font-semibold text-indigo-900 mb-3 flex items-center">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Security Status
+                        </h3>
+                        <p class="text-indigo-800 text-sm mb-2">All packages are up-to-date with security vulnerabilities resolved:</p>
+                        <ul class="list-disc list-inside text-indigo-700 text-sm space-y-1">
+                            <li>✅ 0 security vulnerabilities</li>
+                            <li>✅ All critical security patches applied</li>
+                            <li>✅ Latest stable versions installed</li>
+                        </ul>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">Core Framework</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex justify-between">
+                                    <span class="text-blue-800">Next.js</span>
+                                    <code class="bg-blue-100 px-2 py-1 rounded text-blue-900">15.5.9</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-blue-800">React</span>
+                                    <code class="bg-blue-100 px-2 py-1 rounded text-blue-900">19.2.1</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-blue-800">React DOM</span>
+                                    <code class="bg-blue-100 px-2 py-1 rounded text-blue-900">19.2.1</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-blue-800">TypeScript</span>
+                                    <code class="bg-blue-100 px-2 py-1 rounded text-blue-900">^5</code>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                            <h3 class="text-lg font-semibold text-green-900 mb-3">Authentication & Database</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex justify-between">
+                                    <span class="text-green-800">NextAuth.js</span>
+                                    <code class="bg-green-100 px-2 py-1 rounded text-green-900">^4.24.13</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-green-800">Mongoose</span>
+                                    <code class="bg-green-100 px-2 py-1 rounded text-green-900">^9.0.0</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-green-800">MongoDB</span>
+                                    <code class="bg-green-100 px-2 py-1 rounded text-green-900">^6.18.0</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-green-800">@auth/mongodb-adapter</span>
+                                    <code class="bg-green-100 px-2 py-1 rounded text-green-900">^3.10.0</code>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                            <h3 class="text-lg font-semibold text-purple-900 mb-3">UI & Styling</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex justify-between">
+                                    <span class="text-purple-800">Tailwind CSS</span>
+                                    <code class="bg-purple-100 px-2 py-1 rounded text-purple-900">^4</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-purple-800">Lucide React</span>
+                                    <code class="bg-purple-100 px-2 py-1 rounded text-purple-900">^0.555.0</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-purple-800">React Hot Toast</span>
+                                    <code class="bg-purple-100 px-2 py-1 rounded text-purple-900">^2.6.0</code>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="bg-orange-50 rounded-lg p-6 border border-orange-200">
+                            <h3 class="text-lg font-semibold text-orange-900 mb-3">Additional Libraries</h3>
+                            <ul class="space-y-2 text-sm">
+                                <li class="flex justify-between">
+                                    <span class="text-orange-800">next-intl</span>
+                                    <code class="bg-orange-100 px-2 py-1 rounded text-orange-900">^4.3.6</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-orange-800">html2canvas</span>
+                                    <code class="bg-orange-100 px-2 py-1 rounded text-orange-900">^1.4.1</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-orange-800">jspdf</span>
+                                    <code class="bg-orange-100 px-2 py-1 rounded text-orange-900">^4.0.0</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-orange-800">recharts</span>
+                                    <code class="bg-orange-100 px-2 py-1 rounded text-orange-900">^3.7.0</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-orange-800">cookies-next</span>
+                                    <code class="bg-orange-100 px-2 py-1 rounded text-orange-900">^6.1.0</code>
+                                </li>
+                                <li class="flex justify-between">
+                                    <span class="text-orange-800">bcryptjs</span>
+                                    <code class="bg-orange-100 px-2 py-1 rounded text-orange-900">^3.0.2</code>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Installation -->
+            <section id="installation" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-download text-indigo-600 mr-3"></i>
+                    Installation
+                </h2>
+                
+                <div class="bg-indigo-50 border-l-4 border-indigo-500 p-6 rounded-lg mb-8">
+                    <h3 class="font-semibold text-indigo-900 mb-2 flex items-center">
+                        <i class="fas fa-shopping-cart mr-2"></i>
+                        Downloading from CodeCanyon
+                    </h3>
+                    <p class="text-indigo-800 text-sm mb-2">This script is available on CodeCanyon. After purchase, you'll receive:</p>
+                    <ol class="list-decimal list-inside text-indigo-700 text-sm space-y-1 ml-4">
+                        <li><strong>main_files.zip</strong> - The initial download package</li>
+                        <li>After extracting main_files.zip, you'll get <strong>ai-lawyer.zip</strong> - This is the actual script file</li>
+                        <li>Extract ai-lawyer.zip to begin installation</li>
+                    </ol>
+                </div>
+
+                <!-- Prerequisites -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-check-circle text-green-600 mr-2"></i>
+                        Prerequisites
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                            <h4 class="font-semibold text-gray-900 mb-3">1. Install Node.js</h4>
+                            <p class="text-gray-700 mb-3">Download and install Node.js from the official website:</p>
+                            <div class="bg-gray-100 rounded p-4 mb-3">
+                                <p class="text-sm text-gray-800 mb-2"><strong>Download:</strong> <a href="https://nodejs.org/" target="_blank" class="text-blue-600 hover:underline">https://nodejs.org/</a></p>
+                                <p class="text-sm text-gray-800">Choose the LTS (Long Term Support) version for stability.</p>
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">Verify installation:</p>
+                            <div class="bg-gray-900 text-green-400 rounded p-3 font-mono text-sm">
+                                <code>node --version</code><br>
+                                <code>npm --version</code>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                            <h4 class="font-semibold text-gray-900 mb-3">2. Install MongoDB</h4>
+                            <p class="text-gray-700 mb-3">Choose one of the following options:</p>
+                            <div class="space-y-3">
+                                <div class="bg-blue-50 rounded p-4 border border-blue-200">
+                                    <h5 class="font-semibold text-blue-900 mb-2">Option A: MongoDB Atlas (Cloud - Recommended)</h5>
+                                    <ul class="list-disc list-inside text-blue-800 text-sm space-y-1">
+                                        <li>Sign up at <a href="https://www.mongodb.com/cloud/atlas" target="_blank" class="text-blue-600 hover:underline">MongoDB Atlas</a></li>
+                                        <li>Create a free cluster (M0 tier available)</li>
+                                        <li>Get your connection string</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-green-50 rounded p-4 border border-green-200">
+                                    <h5 class="font-semibold text-green-900 mb-2">Option B: Local MongoDB Installation</h5>
+                                    <ul class="list-disc list-inside text-green-800 text-sm space-y-1">
+                                        <li>Download from <a href="https://www.mongodb.com/try/download/community" target="_blank" class="text-green-600 hover:underline">MongoDB Community Server</a></li>
+                                        <li>Install and start MongoDB service</li>
+                                        <li>Default connection: <code class="bg-gray-200 px-2 py-1 rounded">mongodb://localhost:27017</code></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Installation Steps -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-cog text-purple-600 mr-2"></i>
+                        Installation Steps
+                    </h3>
+                    <div class="space-y-6">
+                        <div class="border-l-4 border-purple-500 pl-6">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Step 1: Download and Extract Files</h4>
+                            <p class="text-gray-700 mb-3">Download the script from CodeCanyon:</p>
+                            <ol class="list-decimal list-inside text-gray-700 space-y-2 mb-4">
+                                <li>Log in to your CodeCanyon account</li>
+                                <li>Navigate to your downloads section</li>
+                                <li>Download <code class="bg-gray-200 px-2 py-1 rounded">main_files.zip</code></li>
+                                <li>Extract <code class="bg-gray-200 px-2 py-1 rounded">main_files.zip</code> to get <code class="bg-gray-200 px-2 py-1 rounded">ai-lawyer.zip</code></li>
+                                <li>Extract <code class="bg-gray-200 px-2 py-1 rounded">ai-lawyer.zip</code> to your desired location</li>
+                            </ol>
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-3">
+                                <p class="text-blue-800 text-sm"><strong>Note:</strong> After extraction, you should have a folder named <code class="bg-blue-100 px-2 py-1 rounded">ai-lawyer</code> (or similar) containing all the project files.</p>
+                            </div>
+                            <p class="text-gray-700 mb-3">Navigate to the extracted folder:</p>
+                            <div class="bg-gray-900 text-green-400 rounded p-4 font-mono text-sm">
+                                <code>cd ai-lawyer</code>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-blue-500 pl-6">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Step 2: Install Dependencies</h4>
+                            <p class="text-gray-700 mb-3">Navigate to the project directory and install all required packages:</p>
+                            <div class="bg-gray-900 text-green-400 rounded p-4 font-mono text-sm mb-3">
+                                <code>npm install</code>
+                            </div>
+                            <p class="text-sm text-gray-600">This will install all dependencies listed in <code class="bg-gray-200 px-2 py-1 rounded">package.json</code>. This process may take a few minutes.</p>
+                        </div>
+
+                        <div class="border-l-4 border-green-500 pl-6">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Step 3: Configure Environment Variables</h4>
+                            <p class="text-gray-700 mb-4">Create a <code class="bg-gray-200 px-2 py-1 rounded">.env.local</code> file in the root directory with the following variables:</p>
+                            <div class="bg-gray-900 text-green-400 rounded p-4 font-mono text-sm mb-4">
+                                <code>MONGODB_URI=mongodb://localhost:27017/ai-lawyer</code><br>
+                                <code>NEXTAUTH_URL=http://localhost:3000</code><br>
+                                <code>NEXTAUTH_SECRET=your-secret-key-here</code>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded mb-4">
+                                <p class="text-blue-800 text-sm mb-2"><strong>Environment Variables Explained:</strong></p>
+                                <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
+                                    <li><strong>MONGODB_URI:</strong> Your MongoDB connection string. For MongoDB Atlas, use: <code class="bg-blue-100 px-1 py-0.5 rounded">mongodb+srv://username:password@cluster.mongodb.net/ai-lawyer</code></li>
+                                    <li><strong>NEXTAUTH_URL:</strong> The base URL of your application (use your production domain in production)</li>
+                                    <li><strong>NEXTAUTH_SECRET:</strong> A random secret key for encrypting JWT tokens. Generate one using: <code class="bg-blue-100 px-1 py-0.5 rounded">openssl rand -base64 32</code></li>
+                                </ul>
+                            </div>
+                            <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                                <p class="text-yellow-800 text-sm"><strong>Important:</strong></p>
+                                <ul class="list-disc list-inside text-yellow-700 text-sm mt-2 space-y-1">
+                                    <li>Keep your <code class="bg-yellow-100 px-1 py-0.5 rounded">.env.local</code> file secure and never share it</li>
+                                    <li>GPT-4.1 API key can be configured later through the Settings → AI Settings page</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-orange-500 pl-6">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Step 4: Set Up Database</h4>
+                            <p class="text-gray-700 mb-3">Ensure MongoDB is running and accessible:</p>
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 rounded p-4 border border-gray-200">
+                                    <h5 class="font-semibold text-gray-900 mb-2">For Local MongoDB:</h5>
+                                    <div class="bg-gray-900 text-green-400 rounded p-3 font-mono text-sm mb-2">
+                                        <code># Start MongoDB service</code><br>
+                                        <code># Windows: net start MongoDB</code><br>
+                                        <code># macOS: brew services start mongodb-community</code><br>
+                                        <code># Linux: sudo systemctl start mongod</code>
+                                    </div>
+                                </div>
+                                <div class="bg-blue-50 rounded p-4 border border-blue-200">
+                                    <h5 class="font-semibold text-blue-900 mb-2">For MongoDB Atlas:</h5>
+                                    <ul class="list-disc list-inside text-blue-800 text-sm space-y-1">
+                                        <li>Ensure your IP address is whitelisted in Atlas Network Access</li>
+                                        <li>Create a database user with read/write permissions</li>
+                                        <li>Use the connection string provided by Atlas</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="border-l-4 border-teal-500 pl-6">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Step 5: Seed Database (Optional)</h4>
+                            <p class="text-gray-700 mb-3">Populate the database with sample data for testing:</p>
+                            <div class="bg-gray-900 text-green-400 rounded p-4 font-mono text-sm mb-3">
+                                <code>npm run seed</code>
+                            </div>
+                            <p class="text-sm text-gray-600">This creates sample clients, cases, and data for demonstration purposes.</p>
+                        </div>
+
+                        <div class="border-l-4 border-indigo-500 pl-6">
+                            <h4 class="text-xl font-semibold text-gray-800 mb-3">Step 6: Start Development Server</h4>
+                            <p class="text-gray-700 mb-3">Run the application in development mode:</p>
+                            <div class="bg-gray-900 text-green-400 rounded p-4 font-mono text-sm mb-3">
+                                <code>npm run dev</code>
+                            </div>
+                            <p class="text-gray-700 mb-3">The application will start on <code class="bg-gray-200 px-2 py-1 rounded">http://localhost:3000</code></p>
+                            <div class="bg-green-50 border-l-4 border-green-500 p-4 rounded">
+                                <p class="text-green-800 text-sm"><strong>Success!</strong> You should see:</p>
+                                <div class="bg-gray-900 text-green-400 rounded p-3 font-mono text-sm mt-2">
+                                    <code>✓ Ready in X seconds</code><br>
+                                    <code>○ Local: http://localhost:3000</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Configuration -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-brain text-indigo-600 mr-2"></i>
+                        AI API Configuration (OpenAI)
+                    </h3>
+                    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 mb-6 rounded">
+                        <p class="text-amber-900 font-semibold mb-2">Disclaimer</p>
+                        <ul class="list-disc list-inside text-amber-800 text-sm space-y-1">
+                            <li>An external OpenAI API key is required for AI features to function.</li>
+                            <li>Any costs associated with OpenAI API usage are the sole responsibility of the buyer.</li>
+                            <li>This item does NOT include a pre-paid OpenAI API subscription.</li>
+                        </ul>
+                    </div>
+                    <p class="text-gray-700 mb-4">To use AI features, configure your OpenAI API key through Settings → AI Settings:</p>
+                    <div class="space-y-4">
+                        <div class="bg-indigo-50 rounded-lg p-6 border border-indigo-200">
+                            <h4 class="font-semibold text-indigo-900 mb-3">Configure OpenAI API Key</h4>
+                            <ol class="list-decimal list-inside text-indigo-800 space-y-2 text-sm">
+                                <li>Log in to the application</li>
+                                <li>Navigate to <strong>Settings → AI Settings</strong></li>
+                                <li>Create an account at <a href="https://platform.openai.com" target="_blank" class="text-indigo-600 hover:underline">OpenAI Platform</a> and purchase API credits</li>
+                                <li>Add your OpenAI API key in AI Settings</li>
+                                <li>Test the connection and activate the model</li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Production Build -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-rocket text-red-600 mr-2"></i>
+                        Production Build
+                    </h3>
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <p class="text-gray-700 mb-4">To build the application for production:</p>
+                        <div class="space-y-3">
+                            <div class="bg-gray-900 text-green-400 rounded p-4 font-mono text-sm">
+                                <code># Build the application</code><br>
+                                <code>npm run build</code><br>
+                                <br>
+                                <code># Start production server</code><br>
+                                <code>npm run start</code>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-500 p-4 rounded">
+                                <p class="text-blue-800 text-sm"><strong>Note:</strong> Make sure to:</p>
+                                <ul class="list-disc list-inside text-blue-700 text-sm mt-2 space-y-1">
+                                    <li>Set <code class="bg-blue-100 px-1 py-0.5 rounded">NEXTAUTH_URL</code> to your production domain</li>
+                                    <li>Use a strong <code class="bg-blue-100 px-1 py-0.5 rounded">NEXTAUTH_SECRET</code></li>
+                                    <li>Configure production MongoDB connection string</li>
+                                    <li>Enable HTTPS for secure connections</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-tools text-yellow-600 mr-2"></i>
+                        Troubleshooting
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="bg-red-50 border-l-4 border-red-500 p-6 rounded-lg">
+                            <h4 class="font-semibold text-red-900 mb-3">Common Issues and Solutions</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <h5 class="font-semibold text-red-800 mb-2">Issue: MongoDB Connection Failed</h5>
+                                    <ul class="list-disc list-inside text-red-700 text-sm space-y-1 ml-4">
+                                        <li>Verify MongoDB is running: <code class="bg-red-100 px-2 py-1 rounded">mongosh</code> or check service status</li>
+                                        <li>Check connection string in <code class="bg-red-100 px-2 py-1 rounded">.env.local</code></li>
+                                        <li>For Atlas: Verify IP whitelist and credentials</li>
+                                        <li>Check firewall settings</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-red-800 mb-2">Issue: Port 3000 Already in Use</h5>
+                                    <ul class="list-disc list-inside text-red-700 text-sm space-y-1 ml-4">
+                                        <li>Stop other applications using port 3000</li>
+                                        <li>Or use a different port: <code class="bg-red-100 px-2 py-1 rounded">PORT=3001 npm run dev</code></li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-red-800 mb-2">Issue: Module Not Found Errors</h5>
+                                    <ul class="list-disc list-inside text-red-700 text-sm space-y-1 ml-4">
+                                        <li>Delete <code class="bg-red-100 px-2 py-1 rounded">node_modules</code> folder</li>
+                                        <li>Delete <code class="bg-red-100 px-2 py-1 rounded">package-lock.json</code></li>
+                                        <li>Run <code class="bg-red-100 px-2 py-1 rounded">npm install</code> again</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-red-800 mb-2">Issue: Build Errors</h5>
+                                    <ul class="list-disc list-inside text-red-700 text-sm space-y-1 ml-4">
+                                        <li>Clear Next.js cache: <code class="bg-red-100 px-2 py-1 rounded">rm -rf .next</code></li>
+                                        <li>Check TypeScript errors: <code class="bg-red-100 px-2 py-1 rounded">npm run lint</code></li>
+                                        <li>Ensure all environment variables are set</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h5 class="font-semibold text-red-800 mb-2">Issue: AI Features Not Working</h5>
+                                    <ul class="list-disc list-inside text-red-700 text-sm space-y-1 ml-4">
+                                        <li>Verify GPT-4.1 API key is correctly configured</li>
+                                        <li>Check API key permissions and quotas</li>
+                                        <li>Test API connection in Settings → AI Settings</li>
+                                        <li>Check browser console for error messages</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Available Scripts -->
+                <div class="mb-8">
+                    <h3 class="text-2xl font-semibold text-gray-700 mb-4 flex items-center">
+                        <i class="fas fa-terminal text-gray-600 mr-2"></i>
+                        Available Scripts
+                    </h3>
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <div class="space-y-3">
+                            <div class="flex items-start">
+                                <code class="bg-gray-200 px-3 py-1 rounded font-mono text-sm mr-4">npm run dev</code>
+                                <p class="text-gray-700 text-sm flex-1">Start development server with hot reload on <code class="bg-gray-200 px-1 py-0.5 rounded">http://localhost:3000</code></p>
+                            </div>
+                            <div class="flex items-start">
+                                <code class="bg-gray-200 px-3 py-1 rounded font-mono text-sm mr-4">npm run build</code>
+                                <p class="text-gray-700 text-sm flex-1">Build the application for production using Turbopack</p>
+                            </div>
+                            <div class="flex items-start">
+                                <code class="bg-gray-200 px-3 py-1 rounded font-mono text-sm mr-4">npm run start</code>
+                                <p class="text-gray-700 text-sm flex-1">Start the production server (requires build first)</p>
+                            </div>
+                            <div class="flex items-start">
+                                <code class="bg-gray-200 px-3 py-1 rounded font-mono text-sm mr-4">npm run lint</code>
+                                <p class="text-gray-700 text-sm flex-1">Run ESLint to check code quality and find errors</p>
+                            </div>
+                            <div class="flex items-start">
+                                <code class="bg-gray-200 px-3 py-1 rounded font-mono text-sm mr-4">npm run seed</code>
+                                <p class="text-gray-700 text-sm flex-1">Populate database with sample data for testing</p>
+                            </div>
+                            <div class="flex items-start">
+                                <code class="bg-gray-200 px-3 py-1 rounded font-mono text-sm mr-4">npm run test:ai-results</code>
+                                <p class="text-gray-700 text-sm flex-1">Test AI results functionality</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Getting Started -->
+            <section id="getting-started" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-rocket text-green-600 mr-3"></i>
+                    Getting Started
+                </h2>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">1. Login to Your Account</h3>
+                        <p class="text-gray-600 mb-4">Access the system by navigating to the login page and entering your credentials.</p>
+                        <div class="bg-gray-50 border border-gray-200 rounded-lg p-4 mb-4">
+                            <p class="text-sm text-gray-600 mb-2"><strong>Demo Credentials (created by <code class="bg-gray-200 px-1 py-0.5 rounded">npm run seed</code>):</strong></p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                <li><strong>Admin:</strong> admin@ailawyer.com / password123</li>
+                                <li><strong>Lawyer:</strong> lawyer@ailawyer.com / password123</li>
+                            </ul>
+                            <p class="text-xs text-gray-600 mt-3">
+                                Authentication requires bcrypt-hashed passwords. There are no hardcoded/mock credentials in the login logic.
+                            </p>
+                        </div>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">2. Navigate the Dashboard</h3>
+                        <p class="text-gray-600 mb-4">After logging in, you'll be taken to the main dashboard where you can see:</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-2 ml-4">
+                            <li>Practice statistics and key metrics</li>
+                            <li>Recent activity and upcoming hearings or appointments</li>
+                            <li>Quick access to cases, clients, and AI tools</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-semibold text-gray-700 mb-3">3. Explore Features</h3>
+                        <p class="text-gray-600">Use the left sidebar navigation to access all features, including client management, cases, tasks, deadlines, hearings, documents, billing, and AI-powered legal tools.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Dashboard -->
+            <section id="dashboard" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-tachometer-alt text-purple-600 mr-3"></i>
+                    Dashboard
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        The dashboard is your central command center, providing an overview of your legal practice at a glance.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3 flex items-center">
+                                <i class="fas fa-chart-line mr-2"></i>
+                                Statistics Cards
+                            </h3>
+                            <p class="text-blue-800 text-sm mb-2">View key metrics including:</p>
+                            <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
+                                <li>Total Clients</li>
+                                <li>Active Cases</li>
+                                <li>Upcoming Hearings & Appointments</li>
+                                <li>AI Insights</li>
+                            </ul>
+                            <p class="text-blue-600 text-xs mt-3">Click on any card to navigate to the related section.</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                            <h3 class="text-lg font-semibold text-green-900 mb-3 flex items-center">
+                                <i class="fas fa-clock mr-2"></i>
+                                Recent Activity
+                            </h3>
+                            <p class="text-green-800 text-sm">Track your recent actions including:</p>
+                            <ul class="list-disc list-inside text-green-700 text-sm space-y-1 mt-2">
+                                <li>New client intake</li>
+                                <li>Case updates and document uploads</li>
+                                <li>Appointment and hearing scheduling</li>
+                                <li>System updates</li>
+                            </ul>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                            <h3 class="text-lg font-semibold text-purple-900 mb-3 flex items-center">
+                                <i class="fas fa-calendar-check mr-2"></i>
+                                Upcoming Schedule
+                            </h3>
+                            <p class="text-purple-800 text-sm">Quick view of upcoming items:</p>
+                            <ul class="list-disc list-inside text-purple-700 text-sm space-y-1 mt-2">
+                                <li>Hearings and court dates</li>
+                                <li>Appointments and consultations</li>
+                                <li>Deadline reminders</li>
+                            </ul>
+                        </div>
+                        <div class="bg-orange-50 rounded-lg p-6 border border-orange-200">
+                            <h3 class="text-lg font-semibold text-orange-900 mb-3 flex items-center">
+                                <i class="fas fa-bolt mr-2"></i>
+                                Quick Actions
+                            </h3>
+                            <p class="text-orange-800 text-sm">Fast access to common tasks:</p>
+                            <ul class="list-disc list-inside text-orange-700 text-sm space-y-1 mt-2">
+                                <li>Add New Client</li>
+                                <li>Create Case / Schedule Hearing</li>
+                                <li>Open AI Assistant or Drafting</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Client Management -->
+            <section id="clients" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-users text-blue-600 mr-3"></i>
+                    Client Management
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Manage your client records efficiently with comprehensive client management features.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-blue-500 pl-4">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Client List</h3>
+                            <p class="text-gray-600 mb-3">View all your clients in an organized list with search and filter capabilities.</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                <li>Search clients by name, ID, or contact information</li>
+                                <li>Filter by status or matter type</li>
+                                <li>Quick access to client details and linked cases</li>
+                                <li>Delete client records from the actions menu (with confirmation)</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-green-500 pl-4">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Add New Client</h3>
+                            <p class="text-gray-600 mb-3">Create new client records with comprehensive information:</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                <li>Personal or entity information (name, contact details)</li>
+                                <li>Address and communication preferences</li>
+                                <li>Matter types and case associations</li>
+                                <li>Billing and engagement details</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-purple-500 pl-4">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Client Details</h3>
+                            <p class="text-gray-600 mb-3">Access comprehensive client information:</p>
+                            <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                                <li>Contact and demographic information</li>
+                                <li>Linked cases and matters</li>
+                                <li>Documents and correspondence</li>
+                                <li>Billing history and invoices</li>
+                            </ul>
+                        </div>
+                        <div class="border-l-4 border-orange-500 pl-4">
+                            <h3 class="text-xl font-semibold text-gray-700 mb-2">Edit Client Information</h3>
+                            <p class="text-gray-600">Update client records as needed, with full audit trail of changes.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Cases -->
+            <section id="cases" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-briefcase text-indigo-600 mr-3"></i>
+                    Case Management
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Organize and track matters with case management. Create cases, assign clients and lawyers, and link tasks, deadlines, hearings, and documents.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                        <li>Create and edit cases with matter type, status, and description</li>
+                        <li>Associate clients and responsible lawyers</li>
+                        <li>View linked tasks, deadlines, and hearings</li>
+                        <li>Attach documents and track case progress</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Tasks, Deadlines & Hearings -->
+            <section id="tasks-deadlines-hearings" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-tasks text-green-600 mr-3"></i>
+                    Tasks, Deadlines & Hearings
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Keep matters on track with tasks, court deadlines, and hearing management.
+                    </p>
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-2">Tasks</h3>
+                            <p class="text-blue-800 text-sm">Create and assign tasks linked to cases; track status and due dates.</p>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                            <h3 class="text-lg font-semibold text-green-900 mb-2">Deadlines</h3>
+                            <p class="text-green-800 text-sm">Manage court and matter deadlines with reminders and calendar integration.</p>
+                        </div>
+                        <div class="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                            <h3 class="text-lg font-semibold text-purple-900 mb-2">Hearings</h3>
+                            <p class="text-purple-800 text-sm">Schedule and manage hearings; view hearing calendar and case links.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Calendar & Appointments -->
+            <section id="appointments" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-calendar-alt text-green-600 mr-3"></i>
+                    Calendar & Appointments
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Manage your calendar, consultations, and appointments. The calendar view shows hearings and appointments in one place.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                            <h3 class="text-lg font-semibold text-green-900 mb-3">
+                                <i class="fas fa-plus-circle mr-2"></i>
+                                Schedule Appointment
+                            </h3>
+                            <ul class="list-disc list-inside text-green-700 text-sm space-y-1">
+                                <li>Select client and optionally link to a case</li>
+                                <li>Assign lawyer (admin/staff can choose; lawyers see their own)</li>
+                                <li>Choose date and time</li>
+                                <li>Set type and add notes</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">
+                                <i class="fas fa-list mr-2"></i>
+                                View & Manage
+                            </h3>
+                            <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
+                                <li>Calendar view for hearings and appointments</li>
+                                <li>Filter by status or lawyer</li>
+                                <li>Role-based visibility</li>
+                                <li>Reschedule and update status</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Documents -->
+            <section id="documents" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-file-alt text-purple-600 mr-3"></i>
+                    Documents
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Store, organize, and manage legal documents. Use templates, upload files, and link documents to cases and clients.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                            <h3 class="text-lg font-semibold text-purple-900 mb-3">
+                                <i class="fas fa-folder-open mr-2"></i>
+                                All Documents
+                            </h3>
+                            <p class="text-purple-800 text-sm mb-2">View and manage documents with:</p>
+                            <ul class="list-disc list-inside text-purple-700 text-sm space-y-1">
+                                <li>Search and filter by case, client, or type</li>
+                                <li>Upload new documents</li>
+                                <li>Edit metadata and link to matters</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">
+                                <i class="fas fa-file-signature mr-2"></i>
+                                Templates
+                            </h3>
+                            <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
+                                <li>Document templates for letters, agreements, and forms</li>
+                                <li>Reuse templates for consistency</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                            <h3 class="text-lg font-semibold text-green-900 mb-3">
+                                <i class="fas fa-upload mr-2"></i>
+                                Upload
+                            </h3>
+                            <p class="text-green-800 text-sm">Upload documents and associate them with cases or clients.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Lawyers & Staff -->
+            <section id="lawyers-staff" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-user-tie text-blue-600 mr-3"></i>
+                    Lawyers & Staff
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Administrators can manage user accounts for lawyers and staff. The Lawyers list shows users with the <code class="bg-gray-100 px-2 py-1 rounded">doctor</code> role (lawyer), and staff are managed via the Staff module.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">
+                                <i class="fas fa-id-card mr-2"></i>
+                                Lawyer Profile
+                            </h3>
+                            <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
+                                <li>Contact details, practice area, bar information</li>
+                                <li>Qualifications and bio</li>
+                                <li>Edit via dedicated profile page</li>
+                            </ul>
+                        </div>
+                        <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                            <h3 class="text-lg font-semibold text-green-900 mb-3">
+                                <i class="fas fa-user-shield mr-2"></i>
+                                Permissions & Safety
+                            </h3>
+                            <ul class="list-disc list-inside text-green-700 text-sm space-y-1">
+                                <li>Role-based access control (admin/doctor/staff)</li>
+                                <li>Role protected during edit</li>
+                                <li>Passwords stored as bcrypt hashes</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Billing -->
+            <section id="billing" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-file-invoice-dollar text-blue-600 mr-3"></i>
+                    Billing & Invoices
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Create and manage invoices and payments for clients. Use service items for billing rates; invoice edit uses a dedicated page for a stable workflow.
+                    </p>
+                    <ul class="list-disc list-inside text-gray-700 space-y-1 ml-4">
+                        <li>Create invoices linked to clients and matters</li>
+                        <li>Manage service items and rates</li>
+                        <li>Track payments and invoice status</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- Analytical Reports -->
+            <section id="analytical-reports" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-chart-line text-indigo-600 mr-3"></i>
+                    Analytical Reports
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        Analytical reports pull real data from your database. Charts use Recharts, with CSV export available on each report screen.
+                    </p>
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div class="bg-indigo-50 rounded-lg p-6 border border-indigo-200">
+                            <h3 class="text-lg font-semibold text-indigo-900 mb-3">Available Dashboards</h3>
+                            <ul class="list-disc list-inside text-indigo-700 text-sm space-y-1">
+                                <li>Financial</li>
+                                <li>Operational</li>
+                                <li>Performance</li>
+                                <li>Client & Case Analytics</li>
+                                <li>Appointment Analytics</li>
+                            </ul>
+                        </div>
+                        <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                            <h3 class="text-lg font-semibold text-blue-900 mb-3">Filters & Export</h3>
+                            <ul class="list-disc list-inside text-blue-700 text-sm space-y-1">
+                                <li>Date range selector (today/week/month/quarter/year)</li>
+                                <li>Filter toggles by status or type</li>
+                                <li>Export button downloads CSV for the current view</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Internationalization -->
+            <section id="internationalization" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-language text-teal-600 mr-3"></i>
+                    Language (i18n)
+                </h2>
+                <div class="space-y-6">
+                    <p class="text-gray-700 leading-relaxed">
+                        The UI supports multiple languages (English, Spanish, French). Translations are stored in JSON files under <code class="bg-gray-100 px-2 py-1 rounded">messages/</code>.
+                    </p>
+                    <div class="bg-teal-50 rounded-lg p-6 border border-teal-200">
+                        <ul class="list-disc list-inside text-teal-700 text-sm space-y-1">
+                            <li>Change language from Settings</li>
+                            <li>If any text looks stale after switching, reload the page</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Features Overview -->
+            <section id="ai-features" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-brain text-indigo-600 mr-3"></i>
+                    AI-Powered Features
+                </h2>
+                <p class="text-gray-700 leading-relaxed mb-6">
+                    AI Lawyer includes a suite of AI-powered tools designed to enhance legal workflows: drafting, contract review, matter intake, motion drafting, letter packs, and legal knowledge search. All AI features are powered by GPT-4.1 (configure your API key in Settings → AI Settings).
+                </p>
+                <div class="bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg p-6 border border-indigo-200 mb-6">
+                    <p class="text-indigo-900 font-semibold mb-2">AI features available:</p>
+                    <ul class="list-disc list-inside text-indigo-800 text-sm space-y-1">
+                        <li>AI Assistant — general legal queries and context-aware help</li>
+                        <li>AI Drafting — draft documents with AI</li>
+                        <li>AI Matter Intake — intake new matters with structured AI assistance</li>
+                        <li>AI Timeline — build case timelines</li>
+                        <li>AI Contract Review — review contracts and flag issues</li>
+                        <li>AI Motion Draft — draft motions with AI</li>
+                        <li>AI Letter Pack — generate letter packs</li>
+                        <li>AI Knowledge Search — search legal knowledge bases</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- AI Assistant -->
+            <section id="ai-assistant" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-robot text-blue-600 mr-3"></i>
+                    AI Assistant
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Your intelligent legal assistant for queries about law, procedures, case context, and practice management. It can reference your matters and documents when configured.
+                    </p>
+                    <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                        <h3 class="text-lg font-semibold text-blue-900 mb-3">Key Features:</h3>
+                        <ul class="list-disc list-inside text-blue-700 text-sm space-y-2">
+                            <li>Legal research and procedural questions</li>
+                            <li>Case and client context when relevant</li>
+                            <li>Drafting and citation suggestions</li>
+                            <li>Best-practice and workflow tips</li>
+                        </ul>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 border border-gray-200">
+                        <p class="text-sm text-gray-700"><strong>Example Queries:</strong></p>
+                        <ul class="list-disc list-inside text-gray-600 text-sm mt-2 space-y-1">
+                            <li>"What are the elements of a breach of contract claim?"</li>
+                            <li>"Summarize the key deadlines for case X"</li>
+                            <li>"Draft a short engagement letter for a new client"</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Drafting -->
+            <section id="ai-drafting" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-file-alt text-green-600 mr-3"></i>
+                    AI Drafting
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Use AI to draft legal documents, letters, and clauses. Provide context (e.g., matter type, parties, key terms) and refine the output.
+                    </p>
+                    <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                        <h3 class="text-lg font-semibold text-green-900 mb-3">Features:</h3>
+                        <ul class="list-disc list-inside text-green-700 text-sm space-y-2">
+                            <li>Draft from prompts and templates</li>
+                            <li>Edit and iterate on AI-generated text</li>
+                            <li>Link drafts to cases and matters</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Matter Intake -->
+            <section id="ai-matter-intake" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-clipboard-check text-teal-600 mr-3"></i>
+                    AI Matter Intake
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Streamline new matter intake with AI. Capture matter type, parties, key facts, and conflicts information in a structured way and create matters or link to existing cases.
+                    </p>
+                    <div class="bg-teal-50 rounded-lg p-6 border border-teal-200">
+                        <h3 class="text-lg font-semibold text-teal-900 mb-3">Features:</h3>
+                        <ul class="list-disc list-inside text-teal-700 text-sm space-y-2">
+                            <li>Guided intake with AI-suggested fields</li>
+                            <li>Conflict and eligibility checks</li>
+                            <li>Create case and client records from intake</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Timeline -->
+            <section id="ai-timeline" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-chart-line text-purple-600 mr-3"></i>
+                    AI Timeline
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Build and visualize case timelines from facts, documents, or narrative. AI helps order events and highlight key dates for deadlines and strategy.
+                    </p>
+                    <div class="bg-purple-50 rounded-lg p-6 border border-purple-200">
+                        <h3 class="text-lg font-semibold text-purple-900 mb-3">Features:</h3>
+                        <ul class="list-disc list-inside text-purple-700 text-sm space-y-2">
+                            <li>Generate timeline from case description or uploaded content</li>
+                            <li>Edit and reorder events</li>
+                            <li>Export or link to case deadlines</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Contract Review -->
+            <section id="ai-contract-review" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-shield-alt text-red-600 mr-3"></i>
+                    AI Contract Review
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Upload or paste contract text for AI-assisted review. Get summaries, risk flags, and suggested edits. Use as support only—always apply professional judgment.
+                    </p>
+                    <div class="bg-red-50 rounded-lg p-6 border border-red-200">
+                        <h3 class="text-lg font-semibold text-red-900 mb-3">Features:</h3>
+                        <ul class="list-disc list-inside text-red-700 text-sm space-y-2">
+                            <li>Summary of key terms and obligations</li>
+                            <li>Risk and anomaly highlighting</li>
+                            <li>Suggested amendments or questions for counterparty</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Motion Draft -->
+            <section id="ai-motion-draft" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-gavel text-indigo-600 mr-3"></i>
+                    AI Motion Draft
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Draft court motions with AI. Provide case context, relief sought, and jurisdiction; refine the draft to match your style and local rules.
+                    </p>
+                    <div class="bg-indigo-50 rounded-lg p-6 border border-indigo-200">
+                        <h3 class="text-lg font-semibold text-indigo-900 mb-3">Features:</h3>
+                        <ul class="list-disc list-inside text-indigo-700 text-sm space-y-2">
+                            <li>Structured motion drafting (caption, facts, law, prayer)</li>
+                            <li>Citation and authority suggestions</li>
+                            <li>Edit and export for filing</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Letter Pack -->
+            <section id="ai-letter-pack" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-envelope-open-text text-orange-600 mr-3"></i>
+                    AI Letter Pack
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Generate sets of letters (e.g., client letters, opposing counsel, courts) from matter details. Customize templates and merge with case data.
+                    </p>
+                    <div class="bg-orange-50 rounded-lg p-6 border border-orange-200">
+                        <h3 class="text-lg font-semibold text-orange-900 mb-3">Features:</h3>
+                        <ul class="list-disc list-inside text-orange-700 text-sm space-y-2">
+                            <li>Generate multiple letters from one matter input</li>
+                            <li>Consistent formatting and tone</li>
+                            <li>Edit and export individually or as a pack</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Knowledge Search -->
+            <section id="ai-knowledge-search" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-search text-cyan-600 mr-3"></i>
+                    AI Knowledge Search
+                </h2>
+                <div class="space-y-4">
+                    <p class="text-gray-700 leading-relaxed">
+                        Search across your legal knowledge base (policies, precedents, memos) using natural language. Get relevant excerpts and source references.
+                    </p>
+                    <div class="bg-cyan-50 rounded-lg p-6 border border-cyan-200">
+                        <h3 class="text-lg font-semibold text-cyan-900 mb-3">Features:</h3>
+                        <ul class="list-disc list-inside text-cyan-700 text-sm space-y-2">
+                            <li>Natural language queries over uploaded or linked content</li>
+                            <li>Cited snippets and document links</li>
+                            <li>Use for research and consistency across matters</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings & Profile -->
+            <section id="settings" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-cog text-gray-600 mr-3"></i>
+                    Settings & Profile
+                </h2>
+                <div class="space-y-6">
+                    <div class="bg-gray-50 rounded-lg p-6 border border-gray-200">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-3">
+                            <i class="fas fa-user-circle mr-2"></i>
+                            Profile Management
+                        </h3>
+                        <ul class="list-disc list-inside text-gray-700 text-sm space-y-2">
+                            <li>Update personal information</li>
+                            <li>Change password</li>
+                            <li>Manage contact details</li>
+                            <li>Profile picture upload</li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-6 border border-blue-200">
+                        <h3 class="text-lg font-semibold text-blue-900 mb-3">
+                            <i class="fas fa-sliders-h mr-2"></i>
+                            System Settings
+                        </h3>
+                        <ul class="list-disc list-inside text-blue-700 text-sm space-y-2">
+                            <li>GPT-4.1 configuration</li>
+                            <li>Notification settings</li>
+                            <li>Language preferences</li>
+                            <li>Display preferences</li>
+                            <li>Data export options</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-6 border border-green-200">
+                        <h3 class="text-lg font-semibold text-green-900 mb-3">
+                            <i class="fas fa-brain mr-2"></i>
+                            AI Settings
+                        </h3>
+                        <ul class="list-disc list-inside text-green-700 text-sm space-y-2">
+                            <li>Configure GPT-4.1 API key</li>
+                            <li>Test API connection</li>
+                            <li>Adjust AI response parameters</li>
+                            <li>Manage AI feature preferences</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Tips & Best Practices -->
+            <section id="tips" class="section-anchor bg-white rounded-lg shadow-md p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-3"></i>
+                    Tips & Best Practices
+                </h2>
+                <div class="space-y-6">
+                    <div class="bg-yellow-50 border-l-4 border-yellow-500 p-6 rounded">
+                        <h3 class="text-lg font-semibold text-yellow-900 mb-3">General Tips</h3>
+                        <ul class="list-disc list-inside text-yellow-800 space-y-2">
+                            <li>Keep client and case information up-to-date for accurate AI outputs</li>
+                            <li>Use search to quickly find clients, cases, documents, or appointments</li>
+                            <li>Review deadlines and hearings regularly; use the calendar view</li>
+                            <li>Export important data and reports for backup</li>
+                            <li>Use AI features as support tools; always apply professional legal judgment</li>
+                        </ul>
+                    </div>
+                    <div class="bg-blue-50 border-l-4 border-blue-500 p-6 rounded">
+                        <h3 class="text-lg font-semibold text-blue-900 mb-3">AI Features Best Practices</h3>
+                        <ul class="list-disc list-inside text-blue-800 space-y-2">
+                            <li>Verify AI-generated drafts and contract reviews before use or filing</li>
+                            <li>Use matter intake to keep matter data consistent for AI tools</li>
+                            <li>Ensure your GPT-4.1 API key is valid and has sufficient credits (Settings → AI Settings)</li>
+                            <li>Review and redact confidential information before pasting into AI</li>
+                        </ul>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded">
+                        <h3 class="text-lg font-semibold text-green-900 mb-3">Security & Privacy</h3>
+                        <ul class="list-disc list-inside text-green-800 space-y-2">
+                            <li>Always log out when finished, especially on shared computers</li>
+                            <li>Keep your password secure and change it regularly</li>
+                            <li>Respect client confidentiality and applicable ethics rules when using AI</li>
+                            <li>Review access logs and ensure secure connections when accessing the system</li>
+                        </ul>
+                    </div>
+                    <div class="bg-purple-50 border-l-4 border-purple-500 p-6 rounded">
+                        <h3 class="text-lg font-semibold text-purple-900 mb-3">Efficiency Tips</h3>
+                        <ul class="list-disc list-inside text-purple-800 space-y-2">
+                            <li>Use keyboard shortcuts for faster navigation</li>
+                            <li>Set up quick actions for frequently performed tasks</li>
+                            <li>Use filters and search to quickly locate information</li>
+                            <li>Take advantage of bulk actions where available</li>
+                            <li>Customize your dashboard to show most relevant information</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="bg-gray-800 text-white rounded-lg p-8 mt-12">
+                <div class="text-center">
+                    <h3 class="text-2xl font-bold mb-4">AI Lawyer</h3>
+                    <p class="text-gray-300 mb-4">AI Lawyer - AI-Powered Legal Practice Management System</p>
+                    <p class="text-gray-400 text-sm">
+                        For technical support or questions, please contact your system administrator.
+                    </p>
+                    <p class="text-gray-500 text-xs mt-4">
+                        © 2026 AI Lawyer. All rights reserved.
+                    </p>
+                </div>
+            </footer>
+        </div>
+    </main>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobileMenuBtn" class="lg:hidden fixed top-4 left-4 z-50 bg-blue-600 text-white p-3 rounded-lg shadow-lg">
+        <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="lg:hidden fixed inset-0 bg-blue-900 text-white z-40 transform -translate-x-full transition-transform duration-300">
+        <div class="p-6">
+            <div class="flex justify-between items-center mb-8">
+                <h1 class="text-2xl font-bold flex items-center">
+                    <i class="fas fa-balance-scale mr-3 text-blue-300"></i>
+                    AI Lawyer
+                </h1>
+                <button id="closeMobileMenu" class="text-white">
+                    <i class="fas fa-times text-2xl"></i>
+                </button>
+            </div>
+            <ul class="space-y-2">
+                <li><a href="#introduction" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-book-open mr-3 w-5"></i>Introduction</a></li>
+                <li><a href="#technology-stack" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-code mr-3 w-5"></i>Technology Stack</a></li>
+                <li><a href="#installation" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-download mr-3 w-5"></i>Installation</a></li>
+                <li><a href="#getting-started" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-rocket mr-3 w-5"></i>Getting Started</a></li>
+                <li><a href="#dashboard" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-tachometer-alt mr-3 w-5"></i>Dashboard</a></li>
+                <li><a href="#clients" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-users mr-3 w-5"></i>Client Management</a></li>
+                <li><a href="#cases" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-briefcase mr-3 w-5"></i>Cases</a></li>
+                <li><a href="#tasks-deadlines-hearings" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-tasks mr-3 w-5"></i>Tasks, Deadlines & Hearings</a></li>
+                <li><a href="#appointments" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-calendar-alt mr-3 w-5"></i>Calendar & Appointments</a></li>
+                <li><a href="#documents" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-file-alt mr-3 w-5"></i>Documents</a></li>
+                <li><a href="#lawyers-staff" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-user-tie mr-3 w-5"></i>Lawyers & Staff</a></li>
+                <li><a href="#billing" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-file-invoice-dollar mr-3 w-5"></i>Billing</a></li>
+                <li><a href="#analytical-reports" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-chart-line mr-3 w-5"></i>Analytical Reports</a></li>
+                <li><a href="#internationalization" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-language mr-3 w-5"></i>Language (i18n)</a></li>
+                <li><a href="#ai-features" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-brain mr-3 w-5"></i>AI Features</a></li>
+                <li><a href="#settings" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-cog mr-3 w-5"></i>Settings & Profile</a></li>
+                <li><a href="#tips" class="block px-4 py-2 rounded hover:bg-blue-800 transition flex items-center"><i class="fas fa-lightbulb mr-3 w-5"></i>Tips & Best Practices</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu functionality
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const closeMobileMenu = document.getElementById('closeMobileMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('-translate-x-full');
+        });
+
+        closeMobileMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('-translate-x-full');
+        });
+
+        // Close mobile menu when clicking on a link
+        const mobileLinks = mobileMenu.querySelectorAll('a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('-translate-x-full');
+            });
+        });
+
+        // Jump to anchor links (instant scroll)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'auto',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

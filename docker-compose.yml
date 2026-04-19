@@ -1,0 +1,30 @@
+services:
+  mongo:
+    image: mongo:7
+    container_name: mongodb_n7bm
+    restart: always
+    ports:
+      - "27029:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  ai-lawyer-app:
+    container_name: ai-lawyer-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - mongo
+    ports:
+      - "3000:3000"
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      NEXTAUTH_URL: https://smartlawyer.ojalstar.com
+      NEXTAUTH_SECRET: CHANGE_THIS_SECRET
+      AUTH_TRUST_HOST: "true"
+      MONGODB_URI: mongodb://mongo:27017/ai-lawyer
+
+volumes:
+  mongo_data:

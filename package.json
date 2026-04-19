@@ -1,0 +1,51 @@
+{
+  "name": "ai-doc",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --turbopack",
+    "build:vercel": "SKIP_LINTING=true SKIP_TYPE_CHECK=true next build --turbopack",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "tsx scripts/seed-db.ts",
+    "test:ai-results": "tsx scripts/test-ai-results.ts"
+  },
+  "dependencies": {
+    "@auth/mongodb-adapter": "^3.10.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^3.0.2",
+    "cookies-next": "^6.1.0",
+    "html2canvas": "^1.4.1",
+    "jspdf": "^4.0.0",
+    "lucide-react": "^0.555.0",
+    "mongodb": "^6.18.0",
+    "mongoose": "^9.0.0",
+    "next": "^16.1.6",
+    "next-auth": "^4.24.13",
+    "next-intl": "^4.3.6",
+    "react": "19.2.1",
+    "react-dom": "19.2.1",
+    "react-hot-toast": "^2.6.0",
+    "react-is": "^19.2.4",
+    "recharts": "^3.7.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^0.1.0",
+    "@tailwindcss/postcss": "^4",
+    "@types/mongodb": "^4.0.6",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "dotenv": "^17.2.3",
+    "eslint": "^10.0.1",
+    "eslint-config-next": "^0.2.4",
+    "tailwindcss": "^4",
+    "tsx": "^4.20.4",
+    "typescript": "^5"
+  },
+  "overrides": {
+    "js-yaml": "^4.1.1"
+  }
+}
