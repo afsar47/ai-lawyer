@@ -143,7 +143,7 @@ export default function ActivityPage() {
                 {t('activity.allActivities') || 'All Activities'}
               </h2>
               <p className="text-sm text-gray-500 mt-1">
-                {activities.length} {t('activity.totalActivities') || 'total activities'}
+                {activities.length} {t('activity.totalActivities') || 'total activities of'}
               </p>
             </div>
             <div className="p-6">
