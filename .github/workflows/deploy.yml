@@ -18,8 +18,17 @@ jobs:
           key: ${{ secrets.SERVER_SSH_KEY }}
           port: 22
           script: |
+            export DOCKER_BUILDKIT=1
+            export COMPOSE_DOCKER_CLI_BUILD=1
+
             git config --global --add safe.directory /www/docker/ai-lawyer
+
             cd /www/docker/ai-lawyer
+
             git pull origin main
-            docker compose up -d --build
+
+            docker compose build
+
+            docker compose up -d
+
             docker image prune -f
