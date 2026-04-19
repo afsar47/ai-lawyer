@@ -45,7 +45,7 @@
   },
   "login": {
     "title": "Sign In",
-    "subtitle": "Welcome back to AI Lawyer",
+    "subtitle": "Welcome back to AI Lawyer test",
     "description": "Sign in to your account to access the law firm management system",
     "email": "Email Address",
     "password": "Password",
