@@ -1,635 +1,246 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import Link from 'next/link';
-import ProtectedRoute from './protected-route';
-import SidebarLayout from './components/sidebar-layout';
-import { useTranslations } from './hooks/useTranslations';
-import { useSettings } from './contexts/SettingsContext';
-import { 
-  Users,
-  Calendar,
+import { useSession } from 'next-auth/react';
+import {
+  Scale,
+  ArrowRight,
+  Gavel,
+  Bot,
+  ShieldCheck,
   FileText,
-  Briefcase,
-  Receipt,
-  Clock,
-  Activity,
-  AlertCircle,
-  CheckCircle
+  CalendarClock,
+  Wallet,
+  Database,
+  Network,
+  MessagesSquare,
+  Sparkles,
 } from 'lucide-react';
+import DashboardPage from './dashboard/page';
 
-interface DashboardStats {
-  key: string;
-  name: string;
-  value: string;
-  change: string;
-  changeType: string;
-  icon: any;
-  color: string;
-}
+export default function HomePage() {
+  const { status } = useSession();
+  const [mouse, setMouse] = useState({ x: 0, y: 0 });
+  const [scrollY, setScrollY] = useState(0);
+  const revealRef = useRef<HTMLElement | null>(null);
 
-interface RecentActivity {
-  id: string;
-  type: string;
-  title: string;
-  description: string;
-  time: string;
-  status?: string;
-  icon?: any;
-  color?: string;
-}
-
-interface UpcomingAppointment {
-  id: string;
-  client: string;
-  time: string;
-  type: string;
-  status: string;
-}
-
-interface UpcomingHearing {
-  id: string;
-  type: string;
-  court: string;
-  time: string;
-  date: string;
-  caseNumber?: string;
-  clientName?: string;
-  status: string;
-}
-
-interface RecentDocument {
-  id: string;
-  documentNumber: string;
-  title: string;
-  type: string;
-  status: string;
-  clientName?: string;
-  matterNumber?: string;
-  createdAt: string;
-}
-
-export default function DashboardPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
-  const { t, translationsLoaded } = useTranslations();
-  const { settings } = useSettings();
-
-  const [stats, setStats] = useState<DashboardStats[]>([]);
-  const [recentActivities, setRecentActivities] = useState<RecentActivity[]>([]);
-  const [upcomingAppointments, setUpcomingAppointments] = useState<UpcomingAppointment[]>([]);
-  const [upcomingHearings, setUpcomingHearings] = useState<UpcomingHearing[]>([]);
-  const [recentDocuments, setRecentDocuments] = useState<RecentDocument[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-  const dataFetchedRef = useRef(false);
-
-  // Fetch dashboard data
   useEffect(() => {
-    const fetchDashboardData = async () => {
-      // Prevent multiple fetches
-      if (dataFetchedRef.current) return;
+    const onScroll = () => setScrollY(window.scrollY || 0);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-      try {
-        setIsLoading(true);
-        dataFetchedRef.current = true;
+  const frameTexts = [
+    'Capture client intake, contacts, and new matters in one flow.',
+    'Draft motions, contract reviews, and letter packs with AI.',
+    'Manage hearings, deadlines, tasks, and calendar events.',
+    'Finalize billing, payments, documents, and activity logs.',
+  ];
 
-        const response = await fetch('/api/dashboard');
+  const revealProgress = useMemo(() => {
+    if (!revealRef.current) return 0;
+    const rect = revealRef.current.getBoundingClientRect();
+    const vh = window.innerHeight || 1;
+    const start = vh * 0.85;
+    const end = -rect.height * 0.2;
+    const raw = (start - rect.top) / (start - end);
+    return Math.max(0, Math.min(1, raw));
+  }, [scrollY]);
 
-        if (!response.ok) {
-          throw new Error('Failed to fetch dashboard data');
-        }
+  const frameIndex = Math.min(frameTexts.length - 1, Math.floor(revealProgress * frameTexts.length));
 
-        const data = await response.json();
+  const workflow = [
+    { title: 'Client Intake', desc: 'Register clients, collect details, and open a matter.' },
+    { title: 'Case Workspace', desc: 'Organize cases, contacts, notes, and related documents.' },
+    { title: 'AI Drafting', desc: 'Create motions, timelines, and legal letters with AI tools.' },
+    { title: 'Contract Review', desc: 'Run AI contract analysis and legal risk checks.' },
+    { title: 'Hearing + Deadlines', desc: 'Track court events, deadlines, and team tasks.' },
+    { title: 'Billing + Payments', desc: 'Issue invoices, service items, and payment tracking.' },
+  ];
 
-        // Transform stats data with translations and icons
-        const transformedStats = data.stats.map((stat: any) => {
-          let icon, color;
-          switch (stat.name) {
-            case 'openMatters':
-              icon = Briefcase;
-              color = 'blue';
-              break;
-            case 'upcomingDeadlines':
-              icon = Calendar;
-              color = 'orange';
-              break;
-            case 'upcomingHearings':
-              icon = Calendar;
-              color = 'purple';
-              break;
-            case 'unpaidInvoices':
-              icon = Receipt;
-              color = 'green';
-              break;
-            default:
-              icon = Activity;
-              color = 'gray';
-          }
+  const integrations = [
+    { title: 'Documents + Templates', desc: 'Upload, version, and reuse legal templates by matter.', icon: FileText, span: 'md:col-span-2' },
+    { title: 'Calendar + Hearings', desc: 'Court schedule, consultations, and event planning.', icon: CalendarClock, span: '' },
+    { title: 'Invoices + Payments', desc: 'Service items, invoices, collections, and receipts.', icon: Wallet, span: '' },
+    { title: 'Case Intelligence', desc: 'AI timeline, knowledge search, and drafting context.', icon: Network, span: '' },
+    { title: 'Client Portal', desc: 'Share updates, documents, and billing visibility.', icon: MessagesSquare, span: '' },
+    { title: 'MongoDB Data Layer', desc: 'Secure single-tenant persistence for legal operations.', icon: Database, span: 'md:col-span-2' },
+  ];
 
-          return {
-            key: stat.name,
-            name: t(`dashboard.stats.${stat.name}`),
-            value: stat.value,
-            change: stat.change,
-            changeType: stat.changeType,
-            icon,
-            color
-          };
-        });
-
-        // Transform recent activities with translations
-        const transformedActivities = data.recentActivities.map((activity: any) => {
-          let icon, color;
-          switch (activity.type) {
-            case 'appointment':
-              icon = Calendar;
-              color = 'green';
-              break;
-            case 'client':
-              icon = Users;
-              color = 'blue';
-              break;
-            case 'report':
-              icon = FileText;
-              color = 'purple';
-              break;
-            case 'hearing':
-              icon = Calendar;
-              color = 'purple';
-              break;
-            default:
-              icon = Activity;
-              color = 'gray';
-          }
-
-          return {
-            ...activity,
-            icon,
-            color
-          };
-        });
-
-        setStats(transformedStats);
-        setRecentActivities(transformedActivities);
-        setUpcomingAppointments(data.upcomingAppointments || []);
-        setUpcomingHearings(data.upcomingHearings || []);
-        setRecentDocuments(data.recentDocuments || []);
-        setError(null);
-      } catch (err) {
-        console.error('Error fetching dashboard data:', err);
-        setError('Failed to load dashboard data');
-        // Set fallback data
-        setStats([
-          {
-            key: 'openMatters',
-            name: t('dashboard.stats.openMatters'),
-            value: '0',
-            change: '0%',
-            changeType: 'neutral',
-            icon: Briefcase,
-            color: 'blue'
-          },
-          {
-            key: 'upcomingDeadlines',
-            name: t('dashboard.stats.upcomingDeadlines'),
-            value: '0',
-            change: '0%',
-            changeType: 'neutral',
-            icon: Calendar,
-            color: 'orange'
-          },
-          {
-            key: 'unpaidInvoices',
-            name: t('dashboard.stats.unpaidInvoices'),
-            value: '0',
-            change: '0%',
-            changeType: 'neutral',
-            icon: Receipt,
-            color: 'green'
-          }
-        ]);
-        setRecentActivities([]);
-        setUpcomingAppointments([]);
-        setRecentDocuments([]);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    // Only fetch if translations are loaded and we haven't fetched yet
-    if (translationsLoaded && !dataFetchedRef.current) {
-      fetchDashboardData();
-    }
-  }, [t, translationsLoaded]);
-
-  // Show loading while checking authentication
-  if (status === 'loading' || !translationsLoaded) {
+  if (status === 'loading') {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">{t('common.loading')}</p>
+          <p className="mt-4 text-gray-600">Loading...</p>
         </div>
       </div>
     );
   }
 
-  // Redirect to login if not authenticated
-  if (status === 'unauthenticated') {
-    router.push('/login');
-    return null;
+  // Keep original behavior for logged-in users: root shows dashboard.
+  if (status === 'authenticated') {
+    return <DashboardPage />;
   }
 
-
+  // Public home page with login button.
   return (
-    <ProtectedRoute>
-      <SidebarLayout 
-        title={t('navigation.dashboard')} 
-        description={t('dashboard.welcome.subtitle')}
-      >
-        <div className="space-y-8">
-          {/* Welcome Section */}
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-6 text-white">
-            <h1 className="text-2xl font-bold mb-2">
-              {t('dashboard.welcome.title', { name: session?.user?.name || 'Lawyer' })}
+    <main className="relative min-h-screen overflow-x-hidden bg-slate-900 text-white">
+      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(250,204,21,0.08),transparent_35%),radial-gradient(circle_at_80%_10%,rgba(148,163,184,0.22),transparent_40%),radial-gradient(circle_at_50%_90%,rgba(250,204,21,0.08),transparent_45%)]" />
+
+      <div className="relative mx-auto max-w-7xl px-6 py-16 sm:py-20">
+        <header className="mb-10 flex items-center justify-between rounded-2xl border border-slate-700/80 bg-slate-800/60 px-4 py-3 backdrop-blur sm:px-6">
+          <div className="inline-flex items-center gap-2 text-sm font-semibold text-slate-200">
+            <Scale className="h-4 w-4 text-amber-300" />
+            AI Legal OS
+          </div>
+          <Link
+            href="/login"
+            className="inline-flex items-center gap-2 rounded-lg border border-amber-400/35 bg-amber-300/10 px-4 py-2 text-sm font-semibold text-amber-100 transition hover:bg-amber-300/20"
+          >
+            Login
+            <ArrowRight className="h-4 w-4" />
+          </Link>
+        </header>
+
+        <section className="grid items-center gap-12 lg:grid-cols-2">
+          <div style={{ transform: `translateY(${Math.min(scrollY * 0.06, 42)}px)` }}>
+            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-slate-600 bg-slate-800/70 px-4 py-2 text-sm text-slate-300">
+              <Sparkles className="h-4 w-4 text-amber-300" />
+              Built for the AI Lawyer management platform
+            </div>
+
+            <h1 className="text-4xl font-bold leading-tight sm:text-5xl lg:text-6xl">
+              Precision legal management,
+              <span className="block bg-gradient-to-r from-amber-200 via-amber-400 to-yellow-200 bg-clip-text text-transparent">
+                powered by AI.
+              </span>
             </h1>
-            <p className="text-blue-100">
-              {t('dashboard.welcome.subtitle')}
+
+            <p className="mt-6 max-w-xl text-base text-slate-300 sm:text-lg">
+              Manage clients, cases, hearings, documents, reports, tasks, billing, and AI legal workflows from one dashboard.
             </p>
+
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <Link
+                href="/login"
+                className="inline-flex items-center gap-2 rounded-xl bg-amber-400 px-6 py-3 font-semibold text-slate-900 transition hover:bg-amber-300"
+              >
+                Enter Workspace
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <div className="inline-flex items-center gap-2 rounded-xl border border-slate-600 bg-slate-800/70 px-4 py-3 text-sm text-slate-300">
+                <ShieldCheck className="h-4 w-4 text-amber-300" />
+                White-label, single-tenant, audit-friendly
+              </div>
+            </div>
           </div>
 
-          {/* Stats Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {isLoading ? (
-              // Loading skeletons
-              Array.from({ length: 4 }).map((_, index) => (
-                <div key={index} className="bg-white rounded-lg shadow p-6">
-                  <div className="flex items-center justify-between">
-                    <div className="flex-1">
-                      <div className="h-4 bg-gray-200 rounded w-3/4 mb-2 animate-pulse"></div>
-                      <div className="h-8 bg-gray-200 rounded w-1/2 mb-2 animate-pulse"></div>
-                      <div className="h-3 bg-gray-200 rounded w-1/4 animate-pulse"></div>
-                    </div>
-                    <div className="w-12 h-12 bg-gray-200 rounded-full animate-pulse"></div>
-                  </div>
-                </div>
-              ))
-            ) : (
-              stats.map((stat) => {
-                // Define navigation links for each stat type
-                let href = '#';
-                switch (stat.key) {
-                  case 'openMatters':
-                    href = '/cases';
-                    break;
-                  case 'upcomingDeadlines':
-                    href = '/calendar';
-                    break;
-                  case 'upcomingHearings':
-                    href = '/hearings';
-                    break;
-                  case 'unpaidInvoices':
-                    href = '/billing';
-                    break;
-                  default:
-                    href = '/ai-assistant';
-                    break;
-                }
-
-                return (
-                  <Link
-                    key={stat.key}
-                    href={href}
-                    className="bg-white rounded-lg shadow p-6 hover:shadow-md transition-shadow cursor-pointer block"
-                  >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="text-sm font-medium text-gray-600">{t(`dashboard.stats.${stat.key}`)}</p>
-                    <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
-                    <p className={`text-sm ${
-                          stat.changeType === 'positive' ? 'text-green-600' :
-                          stat.changeType === 'negative' ? 'text-red-600' : 'text-gray-600'
-                    }`}>
-                          {stat.change} {t('dashboard.stats.changeFromLastMonth')}
-                    </p>
-                  </div>
-                  <div className={`p-3 rounded-full bg-${stat.color}-100`}>
-                    <stat.icon className={`h-6 w-6 text-${stat.color}-600`} />
-                  </div>
-                </div>
-                  </Link>
-                );
-              })
-            )}
+          <div
+            onMouseMove={(e) => {
+              const rect = (e.currentTarget as HTMLDivElement).getBoundingClientRect();
+              const x = (e.clientX - rect.left) / rect.width - 0.5;
+              const y = (e.clientY - rect.top) / rect.height - 0.5;
+              setMouse({ x, y });
+            }}
+            onMouseLeave={() => setMouse({ x: 0, y: 0 })}
+            className="relative h-[420px] rounded-3xl border border-slate-700 bg-slate-800/70 p-6 backdrop-blur"
+          >
+            <div className="absolute inset-6 rounded-2xl border border-slate-700/80 bg-slate-900/70" />
+            <div
+              className="absolute inset-0 flex items-center justify-center"
+              style={{ perspective: '1000px' }}
+            >
+              <div
+                className="relative h-52 w-52"
+                style={{
+                  transform: `rotateX(${mouse.y * -18}deg) rotateY(${mouse.x * 24}deg)`,
+                  transformStyle: 'preserve-3d',
+                  transition: 'transform 120ms linear',
+                }}
+              >
+                <div className="absolute inset-0 rounded-[2rem] border border-amber-300/50 bg-gradient-to-br from-amber-300/20 to-amber-500/10 shadow-[0_0_80px_rgba(250,204,21,0.2)]" />
+                <div className="absolute left-1/2 top-1/2 h-24 w-24 -translate-x-1/2 -translate-y-1/2 rounded-full border border-amber-200/60 bg-slate-900/80" />
+                <div className="absolute left-1/2 top-5 h-20 w-2 -translate-x-1/2 rounded-full bg-amber-300/90" />
+                <div className="absolute left-1/2 top-24 h-2 w-28 -translate-x-1/2 rounded-full bg-amber-300/80" />
+                <div className="absolute left-6 top-28 h-10 w-10 rounded-full border border-amber-200/70 bg-slate-900/90" />
+                <div className="absolute right-6 top-28 h-10 w-10 rounded-full border border-amber-200/70 bg-slate-900/90" />
+              </div>
+            </div>
+            <div className="absolute bottom-6 left-6 rounded-lg border border-slate-700 bg-slate-800/85 px-3 py-2 text-xs text-slate-300">
+              3D legal symbol reacts to pointer movement
+            </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Recent Activity */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900">{t('dashboard.recentActivity.title')}</h3>
-                <Link
-                  href="/activity"
-                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
+        <section ref={revealRef} className="mt-20 rounded-3xl border border-slate-700 bg-slate-800/50 p-6 sm:p-8">
+          <p className="text-xs uppercase tracking-[0.18em] text-amber-300/80">Frame Sequence</p>
+          <h2 className="mt-3 text-2xl font-semibold text-white sm:text-3xl">How the legal OS orchestrates every case</h2>
+          <div className="mt-6 space-y-3">
+            {frameTexts.map((text, idx) => (
+              <p
+                key={text}
+                className={`text-base transition-all duration-500 sm:text-lg ${
+                  frameIndex === idx ? 'translate-x-0 text-white opacity-100' : 'translate-x-2 text-slate-400 opacity-35'
+                }`}
+              >
+                {text}
+              </p>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-16">
+          <div className="mb-3 flex items-center justify-between">
+            <h2 className="text-sm font-semibold uppercase tracking-wider text-slate-300">Legal Workflow Vertical Timeline</h2>
+            <span className="text-xs text-slate-400">Scroll down</span>
+          </div>
+          <div className="relative rounded-2xl border border-slate-700 bg-slate-800/50 p-3">
+            <div className="pointer-events-none absolute inset-x-0 top-0 h-12 bg-gradient-to-b from-slate-900 to-transparent" />
+            <div className="pointer-events-none absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-slate-900 to-transparent" />
+            <div className="max-h-[380px] space-y-3 overflow-y-auto pr-1 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+              {workflow.map((item, idx) => (
+                <article
+                  key={item.title}
+                  className="group rounded-xl border border-slate-700 bg-slate-900/75 p-4 transition hover:-translate-y-0.5 hover:border-amber-300/50"
                 >
-                  {t('dashboard.recentActivity.viewAll')}
-                </Link>
-              </div>
-              <div className="p-6">
-                {isLoading ? (
-                  <div className="space-y-4">
-                    {Array.from({ length: 5 }).map((_, index) => (
-                      <div key={index} className="flex items-start space-x-3">
-                        <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
-                        <div className="flex-1 min-w-0">
-                          <div className="h-4 bg-gray-200 rounded w-3/4 mb-1 animate-pulse"></div>
-                          <div className="h-3 bg-gray-200 rounded w-1/2 mb-1 animate-pulse"></div>
-                          <div className="h-3 bg-gray-200 rounded w-1/4 animate-pulse"></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : recentActivities.length > 0 ? (
-                <div className="space-y-4">
-                    {recentActivities.slice(0, 5).map((activity) => {
-                      // Define navigation links for each activity type
-                      let href = '#';
-                      if (activity.type === 'client') {
-                        // For clients, link to clients list
-                        href = '/clients';
-                      } else if (activity.type === 'appointment') {
-                        // For appointments, link to specific appointment
-                        href = `/appointments/${activity.id}`;
-                      } else if (activity.type === 'report') {
-                        // For reports, link to specific report
-                        href = `/reports/${activity.id}`;
-                      } else if (activity.type === 'hearing') {
-                        // For hearings, link to specific hearing
-                        href = `/hearings/${activity.id}`;
-                      }
-
-                      return (
-                        <Link
-                          key={activity.id}
-                          href={href}
-                          className="flex items-start space-x-3 hover:bg-gray-50 p-2 rounded-lg transition-colors cursor-pointer"
-                        >
-                      <div className={`p-2 rounded-full bg-${activity.color}-100`}>
-                        <activity.icon className={`h-4 w-4 text-${activity.color}-600`} />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-sm font-medium text-gray-900">{activity.title}</p>
-                        <p className="text-sm text-gray-500">{activity.description}</p>
-                        <p className="text-xs text-gray-400">{activity.time}</p>
-                      </div>
-                        </Link>
-                      );
-                    })}
-                    </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <Activity className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">{t('dashboard.recentActivity.noActivities')}</p>
-                </div>
-                )}
-              </div>
-            </div>
-
-            {/* Upcoming Appointments */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-6 border-b border-gray-200">
-                <h3 className="text-lg font-semibold text-gray-900">{t('dashboard.upcomingAppointments.title')}</h3>
-              </div>
-              <div className="p-6">
-                {isLoading ? (
-                  <div className="space-y-4">
-                    {Array.from({ length: 3 }).map((_, index) => (
-                      <div key={index} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-4 h-4 bg-gray-200 rounded animate-pulse"></div>
-                          <div>
-                            <div className="h-4 bg-gray-200 rounded w-24 mb-1 animate-pulse"></div>
-                            <div className="h-3 bg-gray-200 rounded w-16 animate-pulse"></div>
-                          </div>
-                        </div>
-                        <div className="text-right">
-                          <div className="h-4 bg-gray-200 rounded w-16 mb-1 animate-pulse"></div>
-                          <div className="h-5 bg-gray-200 rounded w-20 animate-pulse"></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : upcomingAppointments.length > 0 ? (
-                <div className="space-y-4">
-                  {upcomingAppointments.map((appointment) => (
-                      <Link
-                        key={appointment.id}
-                        href={`/appointments/${appointment.id}`}
-                        className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                      >
-                      <div className="flex items-center space-x-3">
-                        <Clock className="h-4 w-4 text-gray-400" />
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">{appointment.client}</p>
-                          <p className="text-xs text-gray-500">{appointment.type}</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm font-medium text-gray-900">{appointment.time}</p>
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                          appointment.status === 'confirmed' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-yellow-100 text-yellow-800'
-                        }`}>
-                          {appointment.status === 'confirmed' ? (
-                            <CheckCircle className="h-3 w-3 mr-1" />
-                          ) : (
-                            <AlertCircle className="h-3 w-3 mr-1" />
-                          )}
-                            {t(`dashboard.upcomingAppointments.status.${appointment.status}`)}
-                        </span>
-                      </div>
-                      </Link>
-                  ))}
-                </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <Clock className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">{t('dashboard.upcomingAppointments.noAppointments')}</p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Upcoming Hearings */}
-            <div className="bg-white rounded-lg shadow">
-              <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-                <h3 className="text-lg font-semibold text-gray-900">{t('dashboard.upcomingHearings.title')}</h3>
-                <Link
-                  href="/hearings"
-                  className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-                >
-                  {t('dashboard.upcomingHearings.viewAll')}
-                </Link>
-              </div>
-              <div className="p-6">
-                {isLoading ? (
-                  <div className="space-y-4">
-                    {Array.from({ length: 4 }).map((_, index) => (
-                      <div key={index} className="flex items-center space-x-3">
-                        <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
-                        <div className="flex-1 min-w-0">
-                          <div className="h-4 bg-gray-200 rounded w-3/4 mb-1 animate-pulse"></div>
-                          <div className="h-3 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                ) : upcomingHearings.length > 0 ? (
-                <div className="space-y-4">
-                  {upcomingHearings.map((hearing) => (
-                      <Link
-                        key={hearing.id}
-                        href={`/hearings/${hearing.id}`}
-                        className="flex items-center justify-between p-3 bg-purple-50 rounded-lg hover:bg-purple-100 transition-colors cursor-pointer"
-                      >
-                      <div className="flex items-center space-x-3">
-                        <Calendar className="h-4 w-4 text-purple-400" />
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">{hearing.court}</p>
-                          <p className="text-xs text-gray-500">{hearing.type.replace('_', ' ')}</p>
-                        </div>
-                      </div>
-                      <div className="text-right">
-                        <p className="text-sm font-medium text-gray-900">{hearing.time}</p>
-                        <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                          hearing.status === 'confirmed' 
-                            ? 'bg-green-100 text-green-800' 
-                            : 'bg-blue-100 text-blue-800'
-                        }`}>
-                          {hearing.status === 'confirmed' ? (
-                            <CheckCircle className="h-3 w-3 mr-1" />
-                          ) : (
-                            <AlertCircle className="h-3 w-3 mr-1" />
-                          )}
-                            {hearing.status}
-                        </span>
-                      </div>
-                      </Link>
-                  ))}
-                </div>
-                ) : (
-                  <div className="text-center py-8">
-                    <Calendar className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">{t('dashboard.upcomingHearings.noHearings')}</p>
-                  </div>
-                )}
-              </div>
+                  <p className="text-xs uppercase tracking-wide text-amber-300/80">Step {idx + 1}</p>
+                  <h3 className="mt-2 text-lg font-semibold text-white">{item.title}</h3>
+                  <p className="mt-1 text-sm text-slate-300">{item.desc}</p>
+                </article>
+              ))}
             </div>
           </div>
+        </section>
 
-          {/* Recent Documents */}
-          <div className="bg-white rounded-lg shadow">
-            <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-              <h3 className="text-lg font-semibold text-gray-900">{t('dashboard.recentDocuments.title')}</h3>
-              <Link
-                href="/documents"
-                className="text-sm text-blue-600 hover:text-blue-700 font-medium"
-              >
-                {t('dashboard.recentDocuments.viewAll')}
-              </Link>
-            </div>
-            <div className="p-6">
-              {isLoading ? (
-                <div className="space-y-3">
-                  {Array.from({ length: 4 }).map((_, index) => (
-                    <div key={index} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg">
-                      <div className="w-8 h-8 bg-gray-200 rounded animate-pulse"></div>
-                      <div className="flex-1">
-                        <div className="h-4 bg-gray-200 rounded w-3/4 mb-1 animate-pulse"></div>
-                        <div className="h-3 bg-gray-200 rounded w-1/2 animate-pulse"></div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : recentDocuments.length > 0 ? (
-                <div className="space-y-3">
-                  {recentDocuments.map((doc) => (
-                    <Link
-                      key={doc.id}
-                      href={`/documents/${doc.id}`}
-                      className="flex items-center justify-between p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors cursor-pointer"
-                    >
-                      <div className="flex items-center space-x-3">
-                        <div className="p-2 bg-purple-100 rounded">
-                          <FileText className="h-4 w-4 text-purple-600" />
-                        </div>
-                        <div>
-                          <p className="text-sm font-medium text-gray-900">{doc.title}</p>
-                          <p className="text-xs text-gray-500">
-                            {doc.documentNumber} {doc.clientName ? `• ${doc.clientName}` : ''}
-                          </p>
-                        </div>
-                      </div>
-                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
-                        doc.status === 'final' ? 'bg-green-100 text-green-800' :
-                        doc.status === 'approved' ? 'bg-blue-100 text-blue-800' :
-                        doc.status === 'review' ? 'bg-yellow-100 text-yellow-800' :
-                        'bg-gray-100 text-gray-800'
-                      }`}>
-                        {doc.status}
-                      </span>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="text-center py-8">
-                  <FileText className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                  <p className="text-gray-500">{t('dashboard.recentDocuments.noDocuments')}</p>
-                </div>
-              )}
-            </div>
+        <section className="mt-16">
+          <div className="mb-4 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-slate-300">
+            <Bot className="h-4 w-4 text-amber-300" />
+            Platform Modules Bento
           </div>
+          <div className="grid gap-4 md:grid-cols-3">
+            {integrations.map((card) => (
+              <article
+                key={card.title}
+                className={`group rounded-2xl border border-slate-700 bg-slate-800/60 p-5 transition duration-200 hover:-translate-y-1 hover:border-amber-300/50 hover:bg-slate-800 ${card.span}`}
+              >
+                <div className="mb-3 inline-flex rounded-lg border border-slate-600 bg-slate-900/80 p-2 text-amber-300 transition group-hover:scale-105 group-hover:border-amber-300/60">
+                  <card.icon className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-semibold text-white">{card.title}</h3>
+                <p className="mt-2 text-sm text-slate-300">{card.desc}</p>
+              </article>
+            ))}
+          </div>
+        </section>
 
-          {/* Quick Actions */}
-          <div className="bg-white rounded-lg shadow p-6">
-            <h3 className="text-lg font-semibold text-gray-900 mb-4">{t('dashboard.quickActions.title')}</h3>
-            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <Link
-                href="/clients/new"
-                className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <Users className="h-5 w-5 text-blue-600" />
-                <span className="text-sm font-medium text-gray-900">{t('dashboard.quickActions.addNewClient')}</span>
-              </Link>
-              <Link
-                href="/appointments/new"
-                className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <Calendar className="h-5 w-5 text-green-600" />
-                <span className="text-sm font-medium text-gray-900">{t('dashboard.quickActions.scheduleAppointment')}</span>
-              </Link>
-              <Link
-                href="/cases/new"
-                className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <Briefcase className="h-5 w-5 text-orange-600" />
-                <span className="text-sm font-medium text-gray-900">{t('dashboard.quickActions.newCase')}</span>
-              </Link>
-              <Link
-                href="/documents/upload"
-                className="flex items-center space-x-3 p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
-              >
-                <FileText className="h-5 w-5 text-purple-600" />
-                <span className="text-sm font-medium text-gray-900">{t('dashboard.quickActions.uploadDocument')}</span>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </SidebarLayout>
-    </ProtectedRoute>
+        <footer className="mt-14 flex items-center justify-center gap-2 text-slate-400">
+          <Scale className="h-4 w-4 text-amber-300" />
+          <span className="text-sm">AI Legal Management Operating System</span>
+        </footer>
+      </div>
+    </main>
   );
 }
