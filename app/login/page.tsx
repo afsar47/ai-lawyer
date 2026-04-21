@@ -31,6 +31,11 @@ export default function LoginPage() {
   const [isDemo, setIsDemo] = useState(false);
   const router = useRouter();
 
+  const getRedirectPathByRole = (role?: string) => {
+    if (role === 'patient') return '/patient-portal';
+    return '/dashboard';
+  };
+
   const demoUsers = [
     { role: 'Admin', email: 'admin@ailawyer.com', password: 'password123', icon: Crown, color: 'bg-purple-100 text-purple-800 border-purple-200' },
     { role: 'Lawyer', email: 'lawyer@ailawyer.com', password: 'password123', icon: Scale, color: 'bg-blue-100 text-blue-800 border-blue-200' },
@@ -43,7 +48,8 @@ export default function LoginPage() {
     const checkSession = async () => {
       const session = await getSession();
       if (session) {
-        router.push('/');
+        const role = (session as any)?.user?.role;
+        router.push(getRedirectPathByRole(role));
       }
     };
     checkSession();
@@ -114,12 +120,10 @@ export default function LoginPage() {
         setError(t('login.invalidCredentials'));
       } else {
         setSuccess(t('login.signInSuccess'));
-        // Redirect based on role (admin -> admin ops area)
+        // Redirect based on role
         const session = await getSession();
         const role = (session as any)?.user?.role;
-        if (role === 'admin') router.push('/lawyers');
-        else if (role === 'patient') router.push('/patient-portal');
-        else router.push('/');
+        router.push(getRedirectPathByRole(role));
       }
     } catch (err) {
       setError(t('login.signInError'));
