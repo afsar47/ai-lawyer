@@ -114,7 +114,7 @@ export default function SidebarLayout({ children, title, description }: SidebarL
 
   const navigation: NavigationItem[] = [
     // Main
-    { id: 'dashboard', label: t('navigation.dashboard'), icon: Home, href: '/', roles: ['admin', 'doctor', 'staff'] },
+    { id: 'dashboard', label: t('navigation.dashboard'), icon: Home, href: '/dashboard', roles: ['admin', 'doctor', 'staff'] },
 
     // People
     { id: 'lawyers', label: t('navigation.doctors'), icon: UserPlus, href: '/lawyers', roles: ['admin'] },
